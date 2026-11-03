@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLACK Dedicated Server | Official Architecture & Administration Portal</title>
+  <meta name="description" content="Official documentation and configuration portal for the BLACK Multiplayer Dedicated Server (Linux/Ubuntu 24.04).">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Inline specific UI enhancements */
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.6rem 1.25rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .tab-btn.active {
+      background: rgba(255, 170, 0, 0.15);
+      color: var(--accent-amber);
+      border-color: rgba(255, 170, 0, 0.4);
+    }
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent-amber);
+      color: #000;
+      border-color: var(--accent-amber);
+    }
+    .search-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <span>BLACK</span>
+      <span class="brand-badge">DEDICATED SERVER</span>
+    </a>
+    <div class="nav-links">
+      <a href="#quickstart" class="nav-link">Quick Start</a>
+      <a href="#configurator" class="nav-link">Configurator</a>
+      <a href="#commands" class="nav-link">Console (cmd.sh)</a>
+      <a href="#production" class="nav-link">Production</a>
+      <a href="#connect" class="nav-link">Player Connect</a>
+    </div>
+    <div class="nav-actions">
+      <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent-green); letter-spacing: 0.08em; display: flex; align-items: center; gap: 6px;">
+        <span class="pulse-dot"></span> PROTOCOL 3 LIVE
+      </span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero container">
+    <div class="hero-tag">
+      <span>TACTICAL HEADLESS ARCHITECTURE</span>
+    </div>
+    <h1 class="hero-title">
+      AUTHORITATIVE <span>DEDICATED SERVER</span>
+    </h1>
+    <p class="hero-subtitle">
+      High-performance Linux referee for Criterion's tactical shooter BLACK. Native hit verification, raycast collision rig, automatic match rotation, and hot-reloadable admin console.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#quickstart" class="btn btn-primary">
+        <span>⚡ Deploy in 5 Min</span>
+      </a>
+      <a href="#configurator" class="btn btn-secondary">
+        <span>⚙️ Visual Configurator</span>
+      </a>
+      <a href="#connect" class="btn btn-secondary">
+        <span>🎮 Join Official VPS</span>
+      </a>
+    </div>
+
+    <!-- Official Live VPS Card -->
+    <div class="live-server-card">
+      <div class="server-header">
+        <div class="server-status-pill">
+          <span class="pulse-dot"></span>
+          <span>OFFICIAL SERVER // ONLINE</span>
+        </div>
+        <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-amber);">
+          UBUNTU 24.04 // KINGHOST VPS
+        </div>
+      </div>
+      <div class="server-grid">
+        <div class="server-stat">
+          <div class="server-stat-label">Server Name</div>
+          <div class="server-stat-val" style="color: var(--accent-amber);">BLACK Dedicated</div>
+        </div>
+        <div class="server-stat">
+          <div class="server-stat-label">Active Map</div>
+          <div class="server-stat-val">Veblensk City</div>
+        </div>
+        <div class="server-stat">
+          <div class="server-stat-label">Game Mode</div>
+          <div class="server-stat-val">Team Deathmatch</div>
+        </div>
+        <div class="server-stat">
+          <div class="server-stat-label">Slots</div>
+          <div class="server-stat-val">Up to 7 Guests</div>
+        </div>
+      </div>
+
+      <div class="copy-ip-bar">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="color: var(--text-dim);">IP / PORT:</span>
+          <span id="official-ip" style="color: #fff; font-weight: 700;">black-mp.vps-kinghost.net:1508</span>
+          <span style="color: var(--text-dim); font-size: 0.78rem;">(189.126.105.191:1508)</span>
+        </div>
+        <button class="copy-btn" id="copy-ip-btn" data-ip="189.126.105.191:1508">Copy IP</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Core Architecture Highlights -->
+  <section class="section container">
+    <h2 class="section-title">ENGINE & SERVER ARCHITECTURE</h2>
+    <p class="section-desc">Engineered for competitive integrity, security, and minimal resource usage.</p>
+
+    <div class="grid-cards">
+      <div class="feature-card">
+        <div class="card-icon">🛡️</div>
+        <h3 class="card-title">Ghost Host (Slot 0 Arbiter)</h3>
+        <p class="card-text">
+          Slot 0 never becomes an active player. The server acts as a pure authoritative arbiter: it renders no local avatar, accepts no damage, and enforces true raycast hitbox validation.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">⚡</div>
+        <h3 class="card-title">Automated Match Flow (v0.4)</h3>
+        <p class="card-text">
+          No lobby deadlocks: matches automatically start once players join and rotate 15 seconds after victory. Even if players forget to vote F6, the server transitions automatically.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🐧</div>
+        <h3 class="card-title">Ultra-Lean Linux Footprint</h3>
+        <p class="card-text">
+          Runs headlessly via virtual Xvfb display (`:99`) with MSAA disabled. Average usage is only ~400 MB RAM and 1.5 CPU cores, making it viable on budget cloud VPS instances.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🔒</div>
+        <h3 class="card-title">Security & Rate Limiting</h3>
+        <p class="card-text">
+          Token-bucket packet validation protects against cadence cheats and grenade spam. Join requests and passwords enforce rate-limiting with automatic banlist persistence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start Deployment -->
+  <section id="quickstart" class="section container">
+    <h2 class="section-title">DEPLOYMENT GUIDE</h2>
+    <p class="section-desc">Step-by-step instructions for launching your dedicated server.</p>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="tab-vps">Ubuntu 24.04 VPS (Recommended)</button>
+      <button class="tab-btn" data-tab="tab-local">Local Machine / WSL2</button>
+      <button class="tab-btn" data-tab="tab-systemd">Systemd Service (24/7)</button>
+    </div>
+
+    <!-- Tab VPS -->
+    <div class="tab-pane active" id="tab-vps">
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Tested on Ubuntu 24.04 LTS (x86_64). Requires 2 vCPUs, 2–4 GB RAM, and UDP port 1508 open.
+      </p>
+
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">1. Install Runtime Dependencies</span>
+          <button class="copy-btn" data-copy-target="cmd-deps">Copy</button>
+        </div>
+        <div class="terminal-body">
+          <pre id="cmd-deps"><span class="cmd-comment"># Install essential runtime libraries and headless X11 display</span>
+sudo apt update && sudo apt install -y xvfb python3 mesa-vulkan-drivers \
+  libvulkan1 libshaderc1 libssl3t64 libx11-6 libxext6 libxrandr2 \
+  libxcursor1 libxi6 libxfixes3 libxkbcommon0 libwayland-client0 libasound2t64</pre>
+        </div>
+      </div>
+
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">2. Build & Launch Server</span>
+          <button class="copy-btn" data-copy-target="cmd-run">Copy</button>
+        </div>
+        <div class="terminal-body">
+          <pre id="cmd-run"><span class="cmd-comment"># 1. Compile the server binary</span>
+./build.sh
+
+<span class="cmd-comment"># 2. Run one-time asset verification and unpack</span>
+server/setup.sh
+
+<span class="cmd-comment"># 3. Launch dedicated server on port 1508 with name</span>
+server/run.sh 1508 "BLACK Dedicated"
+
+<span class="cmd-comment"># To stop the running instance safely:</span>
+server/stop.sh</pre>
+        </div>
+      </div>
+
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">3. Configure Firewall (UFW)</span>
+          <button class="copy-btn" data-copy-target="cmd-ufw">Copy</button>
+        </div>
+        <div class="terminal-body">
+          <pre id="cmd-ufw"><span class="cmd-comment"># Allow game traffic on UDP 1508; keep LAN discovery port 1510 closed on VPS</span>
+sudo ufw allow 1508/udp
+sudo ufw deny 1510/udp
+sudo ufw reload</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Local -->
+    <div class="tab-pane" id="tab-local">
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Hosting locally on WSL2 or a Linux LAN machine for scrims and private testing.
+      </p>
+
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">WSL2 Local Execution</span>
+          <button class="copy-btn" data-copy-target="cmd-wsl">Copy</button>
+        </div>
+        <div class="terminal-body">
+          <pre id="cmd-wsl"><span class="cmd-comment"># Inside WSL2 Ubuntu terminal:</span>
+cd ~/BLACK-Coop
+server/run.sh 1508 "LAN Scrim"
+
+<span class="cmd-comment"># Find your WSL2 internal IP:</span>
+hostname -I | awk '{print $1}'
+
+<span class="cmd-comment"># Connect from Windows game client:</span>
+F10 -> Host/Join LAN -> Enter WSL IP -> Port 1508</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Systemd -->
+    <div class="tab-pane" id="tab-systemd">
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">
+        Production systemd unit file for auto-start on boot and automatic restarts if interrupted.
+      </p>
+
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">/etc/systemd/system/black-server.service</span>
+          <button class="copy-btn" data-copy-target="cmd-systemd">Copy</button>
+        </div>
+        <div class="terminal-body">
+          <pre id="cmd-systemd">[Unit]
+Description=BLACK TDM Dedicated Server
+After=network.target
+
+[Service]
+Type=simple
+User=qkeq
+WorkingDirectory=/home/qkeq/BLACK-Coop
+ExecStart=/home/qkeq/BLACK-Coop/server/run.sh 1508 "BLACK Dedicated"
+ExecStop=/home/qkeq/BLACK-Coop/server/stop.sh
+Restart=always
+RestartSec=5
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target</pre>
+        </div>
+      </div>
+
+      <div class="terminal-block">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">Enable and Start</span>
+          <button class="copy-btn" data-copy-target="cmd-enable">Copy</button>
+        </div>
+        <div class="terminal-body">
+          <pre id="cmd-enable">sudo systemctl daemon-reload
+sudo systemctl enable --now black-server
+sudo systemctl status black-server</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive server.toml Configurator -->
+  <section id="configurator" class="section container">
+    <h2 class="section-title">VISUAL CONFIGURATOR (server.toml)</h2>
+    <p class="section-desc">Generate your tailored dedicated server configuration in real-time.</p>
+
+    <div class="configurator-wrapper">
+      <!-- Input Controls -->
+      <div class="config-inputs">
+        <div class="form-group">
+          <label class="form-label">
+            <span>Server Name</span>
+            <span class="form-help">Max 32 chars</span>
+          </label>
+          <input type="text" id="cfg-name" class="form-input" value="BLACK Dedicated">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>Max Players: <span id="cfg-players-val" style="color: var(--accent-amber);">7</span></span>
+            <span class="form-help">1 to 7</span>
+          </label>
+          <input type="range" id="cfg-players" class="form-range" min="1" max="7" value="7">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>Password (Optional)</span>
+            <span class="form-help">Empty = Public</span>
+          </label>
+          <input type="text" id="cfg-password" class="form-input" placeholder="Leave empty for public server">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">
+              <span>Frag Limit</span>
+              <span class="form-help">Score to win</span>
+            </label>
+            <input type="number" id="cfg-frags" class="form-input" value="20" min="1" max="500">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <span>Time Limit (Min)</span>
+              <span class="form-help">Match duration</span>
+            </label>
+            <input type="number" id="cfg-time" class="form-input" value="10" min="1" max="60">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>Starting Grenades</span>
+            <span class="form-help">0 to 9</span>
+          </label>
+          <input type="number" id="cfg-grenades" class="form-input" value="1" min="0" max="9">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>Message of the Day (MOTD)</span>
+            <span class="form-help">One line per entry</span>
+          </label>
+          <textarea id="cfg-motd" class="form-textarea" rows="3">Welcome to BLACK Team Deathmatch!
+TAB Scoreboard | B Arsenal | T Chat | V Melee</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>Bans File</span>
+            <span class="form-help">Relative path</span>
+          </label>
+          <input type="text" id="cfg-bans" class="form-input" value="bans.txt">
+        </div>
+      </div>
+
+      <!-- Live TOML Preview -->
+      <div class="config-preview">
+        <div class="terminal-block" style="height: 100%; display: flex; flex-direction: column;">
+          <div class="terminal-header">
+            <span class="terminal-title">server/server.toml</span>
+            <button class="copy-btn" data-copy-target="toml-preview">Copy TOML</button>
+          </div>
+          <div class="terminal-body" style="flex: 1;">
+            <pre id="toml-preview"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Console Commands Reference (cmd.sh) -->
+  <section id="commands" class="section container">
+    <h2 class="section-title">ADMIN CONSOLE COMMANDS (cmd.sh)</h2>
+    <p class="section-desc">Manage the server live without disconnecting players via the console FIFO.</p>
+
+    <div class="search-bar">
+      <input type="text" id="cmd-search" class="form-input" placeholder="🔍 Search commands (e.g. status, kick, restart)..." style="max-width: 320px;">
+      
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="admin">Admin</button>
+        <button class="filter-btn" data-filter="gameplay">Gameplay</button>
+        <button class="filter-btn" data-filter="security">Security</button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="cmd-table">
+        <thead>
+          <tr>
+            <th>Command</th>
+            <th>Type</th>
+            <th>Description & Example</th>
+          </tr>
+        </thead>
+        <tbody id="cmd-table-body">
+          <tr data-category="admin">
+            <td><code class="cmd-code">cmd.sh status</code></td>
+            <td><span class="cmd-tag tag-admin">Admin</span></td>
+            <td>Prints live match phase, frags, timer, and roster of connected players (ID, Name, Team, Ping, IP).</td>
+          </tr>
+          <tr data-category="gameplay">
+            <td><code class="cmd-code">cmd.sh restart</code></td>
+            <td><span class="cmd-tag tag-gameplay">Gameplay</span></td>
+            <td>Instantly resets the round, clock and frags, forcing a fresh countdown and base respawn for all.</td>
+          </tr>
+          <tr data-category="admin">
+            <td><code class="cmd-code">cmd.sh say &lt;message&gt;</code></td>
+            <td><span class="cmd-tag tag-admin">Admin</span></td>
+            <td>Broadcasts an authoritative server announcement to all connected clients in chat.</td>
+          </tr>
+          <tr data-category="security">
+            <td><code class="cmd-code">cmd.sh kick &lt;id&gt;</code></td>
+            <td><span class="cmd-tag tag-security">Security</span></td>
+            <td>Gracefully disconnects a player slot (ID obtained via <code class="cmd-code">cmd.sh status</code>).</td>
+          </tr>
+          <tr data-category="security">
+            <td><code class="cmd-code">cmd.sh ban &lt;id&gt;</code></td>
+            <td><span class="cmd-tag tag-security">Security</span></td>
+            <td>Kicks the player and appends their IP to <code class="cmd-code">server/bans.txt</code> permanently.</td>
+          </tr>
+          <tr data-category="security">
+            <td><code class="cmd-code">cmd.sh unban &lt;ip&gt;</code></td>
+            <td><span class="cmd-tag tag-security">Security</span></td>
+            <td>Removes an IP address from the ban list. Example: <code class="cmd-code">cmd.sh unban 187.61.216.117</code></td>
+          </tr>
+          <tr data-category="security">
+            <td><code class="cmd-code">cmd.sh bans</code></td>
+            <td><span class="cmd-tag tag-security">Security</span></td>
+            <td>Lists all currently active banned IP addresses.</td>
+          </tr>
+          <tr data-category="admin">
+            <td><code class="cmd-code">cmd.sh reload</code></td>
+            <td><span class="cmd-tag tag-admin">Admin</span></td>
+            <td>Re-reads <code class="cmd-code">server.toml</code> and applies updated limits without restarting the server.</td>
+          </tr>
+          <tr data-category="gameplay">
+            <td><code class="cmd-code">cmd.sh fraglimit &lt;n&gt;</code></td>
+            <td><span class="cmd-tag tag-gameplay">Gameplay</span></td>
+            <td>Dynamically updates frag target (1-1000). Applied immediately or on next match.</td>
+          </tr>
+          <tr data-category="gameplay">
+            <td><code class="cmd-code">cmd.sh timelimit &lt;min&gt;</code></td>
+            <td><span class="cmd-tag tag-gameplay">Gameplay</span></td>
+            <td>Sets match duration in minutes (1-120).</td>
+          </tr>
+          <tr data-category="gameplay">
+            <td><code class="cmd-code">cmd.sh grenades &lt;0-9&gt;</code></td>
+            <td><span class="cmd-tag tag-gameplay">Gameplay</span></td>
+            <td>Sets the starting tactical grenade count per life.</td>
+          </tr>
+          <tr data-category="security">
+            <td><code class="cmd-code">cmd.sh password &lt;text | -&gt;</code></td>
+            <td><span class="cmd-tag tag-security">Security</span></td>
+            <td>Sets a new join password on the fly, or pass <code class="cmd-code">-</code> to make the server public.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Player Connection Guide -->
+  <section id="connect" class="section container">
+    <h2 class="section-title">PLAYER JOIN & CONTROLS GUIDE</h2>
+    <p class="section-desc">How players connect from the Windows game client and tactical keybinds.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+      <div class="feature-card">
+        <h3 class="card-title">How to Connect from Windows</h3>
+        <ol style="color: var(--text-muted); padding-left: 1.25rem; font-size: 0.95rem; line-height: 1.8;">
+          <li>Launch <code class="cmd-code">BLACK.exe</code>.</li>
+          <li>Press <code class="cmd-code">F10</code> to summon the Multiplayer In-Game Overlay.</li>
+          <li>Click the <strong>Host / Join (LAN)</strong> tab.</li>
+          <li>Enter Server Address: <code class="cmd-code">black-mp.vps-kinghost.net</code> or <code class="cmd-code">189.126.105.191</code></li>
+          <li>Set Port: <code class="cmd-code">1508</code></li>
+          <li>Click <strong>Connect by IP</strong> to enter Veblensk City!</li>
+        </ol>
+      </div>
+
+      <div class="feature-card">
+        <h3 class="card-title">Network & Focus Guard</h3>
+        <p class="card-text" style="margin-bottom: 1rem;">
+          In network sessions, the game never pauses on window focus loss. If running two local instances for testing, launch with distinct slot variables:
+        </p>
+        <pre style="background: #090c12; padding: 0.75rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-amber);">set BLACK_COOP_WINDOW_SLOT=1
+start BLACK.exe
+set BLACK_COOP_WINDOW_SLOT=2
+start BLACK.exe</pre>
+      </div>
+    </div>
+
+    <!-- Keybinds Grid -->
+    <h3 style="font-size: 1.1rem; text-transform: uppercase; color: #fff; margin-bottom: 1rem; font-weight: 800;">
+      Tactical Match Controls
+    </h3>
+    <div class="keybind-grid">
+      <div class="key-card">
+        <div class="kbd-badge">TAB</div>
+        <div class="key-desc">Tactical Scoreboard & Pings</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">B</div>
+        <div class="key-desc">Arsenal Buy Menu (on Spawn)</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">T</div>
+        <div class="key-desc">Global Match Chat</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">U</div>
+        <div class="key-desc">Team Only Chat</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">V</div>
+        <div class="key-desc">Rifle Butt Melee Strike</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">G</div>
+        <div class="key-desc">Authoritative Grenade Throw</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">F6</div>
+        <div class="key-desc">Rematch Instant Vote</div>
+      </div>
+      <div class="key-card">
+        <div class="kbd-badge">F10</div>
+        <div class="key-desc">Multiplayer Overlay Toggle</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem; font-weight: 700; color: #fff;">
+        BLACK MULTIPLAYER MOD // DEDICATED SERVER PORTAL
+      </p>
+      <p style="margin-bottom: 1rem;">
+        Developed for the reverse-engineered PC port of Criterion's classic FPS.
+      </p>
+      <p style="font-size: 0.78rem;">
+        Official VPS Host: <span style="color: var(--accent-amber);">black-mp.vps-kinghost.net:1508</span> &bull; 
+        Protocol 3 Compatible
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
