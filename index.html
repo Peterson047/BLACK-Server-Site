@@ -3,513 +3,288 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BLACK: MULTIPLAYER // Dedicated Server Operations & Administration Portal</title>
-  <meta name="description" content="Authoritative dedicated server operations, configuration, and battlefield deployment manual for Criterion's tactical shooter BLACK (2006).">
+  <title>BLACK Multiplayer | Play Online & Server Browser</title>
+  <meta name="description" content="Play Criterion's tactical shooter BLACK (2006) online on PC. Dedicated server browser, download links, and setup guide.">
 
-  <!-- Tactical Google Fonts: Black Ops One (Stencil), Teko (Condensed), Share Tech Mono (HUD), Inter (Body) -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  <!-- Subtle CRT Scanlines & Visual Noise -->
-  <div class="crt-overlay"></div>
-
-  <!-- Top Classified Clearance Banner -->
-  <div class="classified-ticker">
-    <div class="ticker-left">
-      <span class="stamp-alert">TOP SECRET // EYES ONLY</span>
-      <span>US DEPT OF DEFENSE // OPERATION VEBLENSK // PROTOCOL 3</span>
-    </div>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <span>ARBITER NODE: <strong style="color: #fff;">189.126.105.191:1508</strong></span>
-      <button id="sound-toggle" class="audio-toggle">SFX: ON [AUDIO]</button>
-    </div>
-  </div>
-
-  <!-- Main Navigation -->
+  <!-- Navigation -->
   <header class="navbar">
-    <a href="#" class="brand-link">
-      <span class="brand-black">BLACK</span>
-      <span class="brand-sub">MULTIPLAYER // OPS</span>
+    <a href="#" class="brand">
+      <span class="brand-title">BLACK</span>
+      <span class="brand-badge">MULTIPLAYER</span>
     </a>
 
     <nav>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="#factions">Factions</a></li>
-        <li class="nav-item"><a href="#telemetry">Live VPS</a></li>
-        <li class="nav-item"><a href="#terminal">Console (cmd.sh)</a></li>
-        <li class="nav-item"><a href="#configurator">Configurator</a></li>
-        <li class="nav-item"><a href="#arsenal">Arsenal Specs</a></li>
-        <li class="nav-item"><a href="#deploy">Deployment</a></li>
-        <li class="nav-item"><a href="#join">Client Join</a></li>
+      <ul class="nav-links">
+        <li><a href="#servers">Servers (Onde Jogar)</a></li>
+        <li><a href="#setup">Como Jogar</a></li>
+        <li><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#controls">Controles</a></li>
+        <li><a href="#host">Hospedar Servidor</a></li>
+        <li><a href="https://discord.gg/szt9HJYjDt" target="_blank" style="color: #5865F2;">Discord</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero Section: "Gun Porn" & Pure Firepower -->
+  <!-- Hero Section -->
   <section class="hero container">
-    <div class="hero-clearance">
-      SUBJECT: JACK KELLAR // TARGET: <span class="redacted">WILLIAM LENNOX</span> // AUTHORITATIVE SERVER
-    </div>
+    <img src="assets/img/cover_mp.png" alt="BLACK Multiplayer" class="hero-cover">
 
-    <h1 class="hero-headline">
-      BLACK
-      <span class="text-accent">DEDICATED SERVER</span>
-    </h1>
-
-    <p class="hero-tagline">
-      "IT'S NOT ABOUT STEALTH. <strong>IT'S ABOUT FIREPOWER.</strong>"<br>
-      Headless Linux authoritative referee. True skeletal hitscan, destruction synchronization, and automated match rotation.
+    <h1 class="hero-title">BLACK MULTIPLAYER</h1>
+    <p class="hero-subtitle">
+      O clássico FPS da Criterion (2006) rodando nativamente no Windows com <strong>modo multiplayer online</strong>. Partidas Team Deathmatch (Black Ops vs. Seventh Wave) a 60+ FPS com suporte a teclado e mouse.
     </p>
 
-    <div class="hero-actions">
-      <a href="#telemetry" class="btn-tactical btn-primary-tactical">
-        <span>RADAR: OFFICIAL VPS</span>
+    <div class="hero-buttons">
+      <a href="#servers" class="btn btn-primary">
+        <span>🎮 Onde Jogar (Servidores)</span>
       </a>
-      <a href="#terminal" class="btn-tactical btn-secondary-tactical">
-        <span>LIVE CLI TERMINAL</span>
+      <a href="https://github.com/Peterson047/BLACK-XBEMultiplayer/releases" target="_blank" class="btn btn-secondary">
+        <span>⬇️ Baixar Jogo (Alpha Build)</span>
       </a>
-      <a href="#configurator" class="btn-tactical btn-secondary-tactical">
-        <span>server.toml BUILDER</span>
+      <a href="https://discord.gg/szt9HJYjDt" target="_blank" class="btn btn-discord">
+        <span>💬 Entrar no Discord</span>
       </a>
     </div>
+  </section>
 
-    <!-- Live Telemetry Card (KingHost Official VPS) -->
-    <div id="telemetry" class="telemetry-card telemetry-corners">
-      <div class="telemetry-header">
-        <div class="telemetry-title">
-          <span class="pulse-radar"></span>
-          <span>BATTLEFIELD ARBITER // OFFICIAL VPS [KINGHOST]</span>
-        </div>
-        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--green-radar);">
-          STATUS: ONLINE // PROTOCOL 3
-        </div>
-      </div>
+  <!-- Section 1: Server Browser (Onde Jogar) -->
+  <section id="servers" class="section container">
+    <span class="section-tag">// SERVIDORES DISPONÍVEIS</span>
+    <h2 class="section-title">ONDE JOGAR AGORA</h2>
+    <p class="section-desc">
+      Conecte-se aos servidores dedicados oficiais online 24/7. Baixo ping no Brasil e partidas automáticas.
+    </p>
 
-      <div class="telemetry-grid">
-        <div class="stat-box">
-          <div class="stat-label">ARBITER DESIGNATION</div>
-          <div class="stat-value" style="color: var(--amber-hot);">BLACK Dedicated</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">COMBAT THEATRE</div>
-          <div class="stat-value">Veblensk City</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">OPERATIONAL MODE</div>
-          <div class="stat-value">Team Deathmatch</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">CLIENT SLOTS</div>
-          <div class="stat-value">7 Guests (Slot 0 Arbiter)</div>
-        </div>
-      </div>
-
-      <div class="ip-banner">
+    <!-- Official Dedicated Server -->
+    <div class="server-card">
+      <div class="server-header">
         <div>
-          <span style="color: var(--text-dim); margin-right: 0.5rem;">DIRECT CONNECT:</span>
-          <span class="ip-address">black-mp.vps-kinghost.net:1508</span>
-          <span style="color: var(--text-dim); font-size: 0.8rem; margin-left: 0.5rem;">[189.126.105.191:1508]</span>
+          <div class="server-badge-status">
+            <span class="pulse"></span>
+            <span>OFICIAL 24/7 // ONLINE</span>
+          </div>
+          <div class="server-name">BLACK Dedicated (Brasil)</div>
         </div>
-        <button class="btn-copy" id="copy-ip-btn" data-ip="189.126.105.191:1508">COPY TARGET IP</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Factions Section -->
-  <section id="factions" class="section container">
-    <span class="section-tag">// INTELLIGENCE DEBRIEFING</span>
-    <h2 class="section-heading">COMBATANT FACTIONS</h2>
-    <p class="section-desc">
-      Two asymmetrical forces clash through the ruined urban sprawl of Veblensk. The dedicated host maintains slot parity and balanced team assignments.
-    </p>
-
-    <div class="factions-container">
-      <!-- Black Ops -->
-      <div class="faction-card blackops">
-        <div class="faction-badge" style="color: #38bdf8;">UNITED STATES // COVERT STRIKE FORCE</div>
-        <h3 class="faction-name">BLACK OPS</h3>
-        <p class="faction-intel">
-          Headed by tactical operative <strong>Jack Kellar</strong>. Elite strike team outfitted with western precision firearms, body armor, and heavy suppressive ordnance.
-        </p>
-        <ul class="faction-specs">
-          <li><strong>Tactical Armory:</strong> M16A2, Remington 870, MP5, M249 SAW, Glock</li>
-          <li><strong>Spawn Perimeter:</strong> Veblensk South Banks & Armored Convoy</li>
-          <li><strong>Radio Identification:</strong> NATO phonetics & squad callouts</li>
-        </ul>
-      </div>
-
-      <!-- Seventh Wave -->
-      <div class="faction-card seventhwave">
-        <div class="faction-badge" style="color: var(--red-alert);">TERROR SYNDICATE // ROGUE CELL</div>
-        <h3 class="faction-name">SEVENTH WAVE</h3>
-        <p class="faction-intel">
-          Illicit international arms cartel orchestrated by rogue CIA officer <span class="redacted">William Lennox</span>. Ruthless combatants utilizing heavy eastern weaponry and reinforced trench networks.
-        </p>
-        <ul class="faction-specs">
-          <li><strong>Tactical Armory:</strong> AK-47, SPAS-12, RPG-7, Heavy Demolition charges</li>
-          <li><strong>Spawn Perimeter:</strong> Veblensk Industrial Ruins & Foundry Street</li>
-          <li><strong>Radio Identification:</strong> Eastern bloc combat chatter</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Terminal Simulator (server/cmd.sh) -->
-  <section id="terminal" class="section container">
-    <span class="section-tag">// ARBITER ADMINISTRATION</span>
-    <h2 class="section-heading">TACTICAL COMMAND CONSOLE</h2>
-    <p class="section-desc">
-      Live demonstration of <code style="color: var(--amber-hot);">server/cmd.sh</code>. Commands execute directly into the running server via its FIFO pipe without interrupting players or dropping connections.
-    </p>
-
-    <div class="cli-simulator-wrapper">
-      <div class="cli-bar">
-        <div class="cli-title">HOST CONSOLE // FIFO: server/logs/console.fifo</div>
-        <div class="cli-quick-pills">
-          <button class="cli-pill" data-cli-cmd="status">status</button>
-          <button class="cli-pill" data-cli-cmd="restart">restart</button>
-          <button class="cli-pill" data-cli-cmd="say All units: Prepare for assault!">say</button>
-          <button class="cli-pill" data-cli-cmd="fraglimit 30">fraglimit 30</button>
-          <button class="cli-pill" data-cli-cmd="bans">bans</button>
-          <button class="cli-pill" data-cli-cmd="help">help</button>
-          <button class="cli-pill" data-cli-cmd="clear">clear</button>
+        <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--amber); background: rgba(245,158,11,0.1); padding: 0.35rem 0.75rem; border-radius: 3px;">
+          HOST AUTORITATIVO LINUX
         </div>
       </div>
 
-      <div class="cli-window" id="cli-output">
-        <div class="cli-output-line" style="color: var(--amber-hot);">[SYS.INIT] Authoritative Dedicated Server console ready.</div>
-        <div class="cli-output-line" style="color: var(--text-dim);">Type commands below or click quick directives above. Try: status, restart, say, kick 1, bans</div>
-        <div class="cli-output-line"><span style="color: #94a3b8;">console: </span>status name="BLACK Dedicated" port=1508 match=1 phase=waiting score=0:0 time_left=10:00 frag_limit=20 password=no</div>
+      <div class="server-grid">
+        <div class="stat-item">
+          <div class="stat-label">LOCALIZAÇÃO</div>
+          <div class="stat-val">São Paulo, BR</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">MAPA ATIVO</div>
+          <div class="stat-val">Veblensk City</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">MODO DE JOGO</div>
+          <div class="stat-val">Team Deathmatch</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">CAPACIDADE</div>
+          <div class="stat-val">Até 7 Jogadores</div>
+        </div>
       </div>
 
-      <div class="cli-prompt-line">
-        <span class="cli-prompt-prefix">qkeq@vps:~$ server/cmd.sh</span>
-        <input type="text" id="cli-input" class="cli-input" placeholder="Type server directive (e.g. status, restart, kick 1, say)..." autocomplete="off" spellcheck="false">
+      <div class="server-ip-row">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); margin-right: 0.5rem;">IP DO SERVIDOR:</span>
+          <span class="ip-text" id="target-ip">189.126.105.191:1508</span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); margin-left: 0.5rem;">(black-mp.vps-kinghost.net)</span>
+        </div>
+        <button class="btn-copy" id="copy-ip-btn" data-ip="189.126.105.191:1508">COPIAR IP</button>
+      </div>
+    </div>
+
+    <!-- Quick Tip on How to Join -->
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 1.25rem 1.5rem; border-radius: 4px; font-size: 0.95rem;">
+      <strong style="color: var(--amber);">Como entrar:</strong> No jogo, aperte <kbd class="hud-key" style="font-size: 0.75rem; padding: 2px 5px;">F10</kbd> → aba <strong>Host / Join (LAN)</strong> → digite o IP <code style="color: #fff; font-family: var(--font-mono);">189.126.105.191</code> e porta <code style="color: #fff; font-family: var(--font-mono);">1508</code> → clique em <strong>Connect by IP</strong>.
+    </div>
+  </section>
+
+  <!-- Section 2: How to Play (Como Jogar em 3 Passos) -->
+  <section id="setup" class="section container">
+    <span class="section-tag">// TUTORIAL DE INSTALAÇÃO</span>
+    <h2 class="section-title">COMO JOGAR EM 3 PASSOS</h2>
+    <p class="section-desc">
+      O mod roda de forma nativa no Windows 10/11 (64-bit) com placa de vídeo compatível com Vulkan.
+    </p>
+
+    <div class="steps-grid">
+      <!-- Passo 1 -->
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title">BAIXE O CLIENTE</h3>
+        <p class="step-desc">
+          Baixe a versão Alpha mais recente no repositório <a href="https://github.com/Peterson047/BLACK-XBEMultiplayer/releases" target="_blank" style="color: var(--amber);">BLACK-XBEMultiplayer</a> e descompacte a pasta no seu computador.
+        </p>
+      </div>
+
+      <!-- Passo 2 -->
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title">COLOQUE SUA ISO</h3>
+        <p class="step-desc">
+          Coloque o arquivo da sua cópia legal do jogo (<strong>Black.iso</strong> de Xbox) dentro da pasta <code style="color: var(--amber); font-family: var(--font-mono);">assets\</code>. O jogo gera os pacotes multiplayer sozinho na primeira vez.
+        </p>
+      </div>
+
+      <!-- Passo 3 -->
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title">ABRA E CONECTE</h3>
+        <p class="step-desc">
+          Execute o <strong style="color: #fff;">BLACK.exe</strong>. Aperte <strong style="color: var(--amber);">F10</strong> para abrir o menu multiplayer, cole o IP do servidor e clique em <strong>Connect by IP</strong>!
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Interactive server.toml Generator -->
-  <section id="configurator" class="section container">
-    <span class="section-tag">// PARAMETER TUNING</span>
-    <h2 class="section-heading">OPERATIONS CONFIGURATOR</h2>
-    <p class="section-desc">
-      Configure your <code style="color: var(--amber-hot);">server/server.toml</code> with live parameters. Hot-reloadable at runtime with <code style="color: var(--amber-hot);">cmd.sh reload</code>.
-    </p>
+  <!-- Section 3: In-Game Screenshots -->
+  <section id="screenshots" class="section container">
+    <span class="section-tag">// GALERIA DO MOD</span>
+    <h2 class="section-title">SCREENSHOTS EM PARTIDA</h2>
+    <p class="section-desc">Imagens reais capturadas nas partidas multiplayer no Windows.</p>
 
-    <div class="config-crate-wrapper">
-      <!-- Config Form -->
+    <div class="screenshot-grid">
+      <div class="screen-item">
+        <img src="assets/img/server_browser.png" alt="Menu de Conexão F10">
+        <div class="screen-caption">Menu de Conexão Multiplayer (F10)</div>
+      </div>
+
+      <div class="screen-item">
+        <img src="assets/img/buy_menu.png" alt="Menu do Arsenal [B]">
+        <div class="screen-caption">Menu do Arsenal / Compra de Armas [B]</div>
+      </div>
+
+      <div class="screen-item">
+        <img src="assets/img/tab_menu.png" alt="Placar de Pontuação [TAB]">
+        <div class="screen-caption">Placar Tático com Pings e Frags [TAB]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Controls Cheat-Sheet -->
+  <section id="controls" class="section container">
+    <span class="section-tag">// TECLAS DE JOGO</span>
+    <h2 class="section-title">CONTROLES EM PARTIDA</h2>
+    <p class="section-desc">Atalhos essenciais durante o combate tático:</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">F10</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Menu Multiplayer</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">TAB</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Placar e Pings</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">B</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Escolher Arma (Spawn)</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">T</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Chat Global</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">U</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Chat de Equipe</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">V</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Coronhada (Melee)</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">G</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Lançar Granada</span>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1rem; display: flex; align-items: center; gap: 1rem; border-radius: 4px;">
+        <span class="hud-key">F6</span>
+        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff;">Votar Revanche</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Community & Donate -->
+  <section class="section container">
+    <div class="community-box">
       <div>
-        <div class="cfg-group">
-          <div class="cfg-label-row">
-            <span>BATTLEFIELD DESIGNATION (name)</span>
-            <span class="cfg-help">Visible in browser</span>
-          </div>
-          <input type="text" id="cfg-name" class="cfg-input" value="BLACK Dedicated">
-        </div>
-
-        <div class="cfg-group">
-          <div class="cfg-label-row">
-            <span>COMBAT CAPACITY (max_players): <span id="cfg-players-val" style="color: var(--amber-hot);">7</span></span>
-            <span class="cfg-help">1 to 7 Guests</span>
-          </div>
-          <input type="range" id="cfg-players" class="cfg-slider" min="1" max="7" value="7">
-        </div>
-
-        <div class="cfg-group">
-          <div class="cfg-label-row">
-            <span>ENCRYPTION PASSPHRASE (password)</span>
-            <span class="cfg-help">Blank = Public engagement</span>
-          </div>
-          <input type="text" id="cfg-password" class="cfg-input" placeholder="Leave empty for public join">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="cfg-group">
-            <div class="cfg-label-row">
-              <span>KILL QUOTA (frag_limit)</span>
-            </div>
-            <input type="number" id="cfg-frags" class="cfg-input" value="20" min="1" max="500">
-          </div>
-
-          <div class="cfg-group">
-            <div class="cfg-label-row">
-              <span>TIME LIMIT (minutes)</span>
-            </div>
-            <input type="number" id="cfg-time" class="cfg-input" value="10" min="1" max="60">
-          </div>
-        </div>
-
-        <div class="cfg-group">
-          <div class="cfg-label-row">
-            <span>ORDNANCE PAYLOAD (grenades)</span>
-            <span class="cfg-help">Per-life starting inventory (0-9)</span>
-          </div>
-          <input type="number" id="cfg-grenades" class="cfg-input" value="1" min="0" max="9">
-        </div>
-
-        <div class="cfg-group">
-          <div class="cfg-label-row">
-            <span>HUD TRANSMISSION (motd)</span>
-            <span class="cfg-help">One line per entry</span>
-          </div>
-          <textarea id="cfg-motd" class="cfg-textarea" rows="3">Welcome to BLACK Team Deathmatch!
-TAB Scoreboard | B Arsenal | T Chat | V Melee</textarea>
-        </div>
-
-        <div class="cfg-group">
-          <div class="cfg-label-row">
-            <span>BLACKLIST ARCHIVE (bans_file)</span>
-          </div>
-          <input type="text" id="cfg-bans" class="cfg-input" value="bans.txt">
-        </div>
+        <h3 style="font-family: var(--font-title); font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem;">
+          ENCONTRE JOGADORES NO DISCORD
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 580px;">
+          Junte-se à comunidade oficial para marcar partidas, campeonatos, avisar quando o servidor estiver lotado e reportar bugs diretamente aos desenvolvedores.
+        </p>
       </div>
 
-      <!-- Live TOML Output -->
-      <div style="display: flex; flex-direction: column;">
-        <div class="toml-output-box">
-          <button class="code-copy-btn" data-copy-target="toml-preview-content">COPY TOML</button>
-          <pre id="toml-preview-content"></pre>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-          <button class="btn-tactical btn-primary-tactical" id="dl-toml-btn" style="flex: 1; justify-content: center;">
-            <span>💾 DOWNLOAD server.toml</span>
-          </button>
-        </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="https://discord.gg/szt9HJYjDt" target="_blank" class="btn btn-discord">
+          <span>💬 Entrar no Discord</span>
+        </a>
+        <a href="https://pixgg.com/peterson047" target="_blank" class="btn btn-secondary">
+          <span>☕ Apoiar via PIX</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- The Arsenal ("Gun Porn" & Hitbox Specifications) -->
-  <section id="arsenal" class="section container">
-    <span class="section-tag">// NATIVE BALLISTICS SPECIFICATION</span>
-    <h2 class="section-heading">THE ARSENAL ("GUN PORN")</h2>
+  <!-- Section 6: Host a Dedicated Server (Hospedagem) -->
+  <section id="host" class="section container">
+    <span class="section-tag">// PARA HOSPEDADORES DE SERVIDORES</span>
+    <h2 class="section-title">QUER CRIAR SEU PRÓPRIO SERVIDOR?</h2>
     <p class="section-desc">
-      True to Criterion's obsession with tactile firearm weight, every shot calculates realistic drop-off curves, penetration, and native skeletal bone volumes.
+      O servidor dedicado roda em Linux (Ubuntu / Debian) de forma leve (~400 MB RAM) com suporte a rotação automática e console de comandos.
     </p>
 
-    <div class="weapons-grid">
-      <div class="weapon-card">
-        <div class="weapon-class">PUMP ACTION SHOTGUN</div>
-        <h3 class="weapon-name">REMINGTON 870</h3>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Pellet Spread</span><span class="weapon-stat-val">8 Pellets / High Force</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Effective Lethal Range</span><span class="weapon-stat-val">0 - 15 Meters</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Magazine</span><span class="weapon-stat-val">8 Shells</span></div>
-      </div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <h3 style="font-family: var(--font-mono); font-size: 1rem; color: #fff; margin-bottom: 0.5rem;">Como subir o servidor no Linux (VPS / WSL):</h3>
+      <div class="code-box">
+<span style="color: var(--amber);"># 1. Instale as dependências:</span>
+sudo apt install -y xvfb python3 mesa-vulkan-drivers libvulkan1 libshaderc1 libssl3t64
 
-      <div class="weapon-card">
-        <div class="weapon-class">COMBAT SHOTGUN</div>
-        <h3 class="weapon-name">SPAS-12</h3>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Firing Mode</span><span class="weapon-stat-val">Semi-Auto Burst</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Destructive Power</span><span class="weapon-stat-val">Brutal Door/Wall Shatter</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Magazine</span><span class="weapon-stat-val">8 Shells</span></div>
-      </div>
+<span style="color: var(--amber);"># 2. Compile e configure:</span>
+./build.sh && server/setup.sh
 
-      <div class="weapon-card">
-        <div class="weapon-class">ASSAULT RIFLE</div>
-        <h3 class="weapon-name">AK-47</h3>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Caliber</span><span class="weapon-stat-val">7.62×39mm Heavy Hit</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Wall Penetration</span><span class="weapon-stat-val">Class 3 Concrete</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Cadence Bucket</span><span class="weapon-stat-val">600 RPM Token Bucket</span></div>
-      </div>
+<span style="color: var(--amber);"># 3. Inicie na porta desejada (UDP):</span>
+server/run.sh 1508 "Meu Servidor BLACK"</div>
 
-      <div class="weapon-card">
-        <div class="weapon-class">ASSAULT RIFLE</div>
-        <h3 class="weapon-name">M16A2</h3>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Burst Configuration</span><span class="weapon-stat-val">3-Round High Precision</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Headshot Multiplier</span><span class="weapon-stat-val">2.5× Instant Lethality</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Magazine</span><span class="weapon-stat-val">30 Rounds</span></div>
-      </div>
-
-      <div class="weapon-card">
-        <div class="weapon-class">LIGHT MACHINE GUN</div>
-        <h3 class="weapon-name">M249 SAW</h3>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Belt Capacity</span><span class="weapon-stat-val">100 Rounds Sustained</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Suppressive Fire</span><span class="weapon-stat-val">Extreme Area Denial</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Recoil Impulse</span><span class="weapon-stat-val">Progressive Kick</span></div>
-      </div>
-
-      <div class="weapon-card">
-        <div class="weapon-class">ORDNANCE</div>
-        <h3 class="weapon-name">M67 GRENADE</h3>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Trajectory Author</span><span class="weapon-stat-val">Host Verified Raycast</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Lethal Blast Radius</span><span class="weapon-stat-val">5.5 Meters</span></div>
-        <div class="weapon-stat-row"><span class="weapon-stat-label">Fuse Timer</span><span class="weapon-stat-val">2.8 Seconds</span></div>
-      </div>
-    </div>
-
-    <!-- Hitbox Multiplier Banner -->
-    <div class="hitbox-banner">
-      <div class="hitbox-item">
-        <h4>HEADSHOT HITBOX</h4>
-        <p>2.5× Damage (0.13m Capsule)</p>
-      </div>
-      <div class="hitbox-item">
-        <h4>TORSO & NECK</h4>
-        <p>1.0× Damage (Unified Rig)</p>
-      </div>
-      <div class="hitbox-item">
-        <h4>ARMS & LEGS</h4>
-        <p>0.75× Damage Multiplier</p>
-      </div>
-      <div class="hitbox-item">
-        <h4>RIFLE BUTT MELEE</h4>
-        <p>100 HP Instakill (&lt;2.0m Cone)</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Deployment Dossier Manual -->
-  <section id="deploy" class="section container">
-    <span class="section-tag">// PRODUCTION FIELD MANUAL</span>
-    <h2 class="section-heading">DEPLOYMENT PROTOCOLS</h2>
-    <p class="section-desc">Technical procedures for operating and staging the server on Linux.</p>
-
-    <div class="dossier-nav">
-      <button class="dossier-tab active" data-dossier="pane-vps">1. Ubuntu 24.04 Staging</button>
-      <button class="dossier-tab" data-dossier="pane-service">2. Systemd 24/7 Service</button>
-      <button class="dossier-tab" data-dossier="pane-firewall">3. Security & Networking</button>
-    </div>
-
-    <!-- Pane 1: VPS Staging -->
-    <div class="dossier-pane active" id="pane-vps">
-      <div class="code-dossier">
-        <button class="code-copy-btn" data-copy-target="dossier-code-1">COPY</button>
-        <pre id="dossier-code-1"><span style="color: var(--amber-hot);"># Step 1: Install core runtime & virtual X11 display (Ubuntu 24.04 LTS)</span>
-sudo apt update && sudo apt install -y xvfb python3 mesa-vulkan-drivers \
-  libvulkan1 libshaderc1 libssl3t64 libx11-6 libxext6 libxrandr2 \
-  libxcursor1 libxi6 libxfixes3 libxkbcommon0 libwayland-client0 libasound2t64
-
-<span style="color: var(--amber-hot);"># Step 2: Compile native Linux release binary</span>
-./build.sh
-
-<span style="color: var(--amber-hot);"># Step 3: Run one-time asset verification (requires assets/default.xbe)</span>
-server/setup.sh
-
-<span style="color: var(--amber-hot);"># Step 4: Fire up dedicated arbiter on UDP 1508</span>
-server/run.sh 1508 "BLACK Dedicated"</pre>
-      </div>
-    </div>
-
-    <!-- Pane 2: Systemd Daemon -->
-    <div class="dossier-pane" id="pane-service">
-      <div class="code-dossier">
-        <button class="code-copy-btn" data-copy-target="dossier-code-2">COPY</button>
-        <pre id="dossier-code-2"><span style="color: var(--amber-hot);"># Create: /etc/systemd/system/black-server.service</span>
-[Unit]
-Description=BLACK TDM Dedicated Server Arbiter
-After=network.target
-
-[Service]
-Type=simple
-User=qkeq
-WorkingDirectory=/home/qkeq/BLACK-Coop
-ExecStart=/home/qkeq/BLACK-Coop/server/run.sh 1508 "BLACK Dedicated"
-ExecStop=/home/qkeq/BLACK-Coop/server/stop.sh
-Restart=always
-RestartSec=5
-LimitNOFILE=65535
-
-[Install]
-WantedBy=multi-user.target
-
-<span style="color: var(--amber-hot);"># Activate and monitor unit:</span>
-sudo systemctl daemon-reload
-sudo systemctl enable --now black-server
-sudo systemctl status black-server</pre>
-      </div>
-    </div>
-
-    <!-- Pane 3: Firewall -->
-    <div class="dossier-pane" id="pane-firewall">
-      <div class="code-dossier">
-        <button class="code-copy-btn" data-copy-target="dossier-code-3">COPY</button>
-        <pre id="dossier-code-3"><span style="color: var(--amber-hot);"># Open game UDP traffic; keep discovery port 1510 closed on public VPS</span>
-sudo ufw allow 1508/udp
-sudo ufw deny 1510/udp
-sudo ufw reload
-
-<span style="color: var(--amber-hot);"># Query server status externally without joining:</span>
-python3 server/query.py 127.0.0.1 1508</pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- Player Infiltration & Controls Guide -->
-  <section id="join" class="section container">
-    <span class="section-tag">// CLIENT INFILTRATION</span>
-    <h2 class="section-heading">HOW TO JOIN & CONTROLS</h2>
-    <p class="section-desc">Instructions for joining the live battlefield from the Windows client.</p>
-
-    <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 2rem; margin-bottom: 2.5rem;">
-      <h3 style="font-family: var(--font-condensed); font-size: 1.6rem; color: #fff; text-transform: uppercase; margin-bottom: 1rem;">
-        CONNECTING IN 30 SECONDS
-      </h3>
-      <ol style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; padding-left: 1.5rem;">
-        <li>Launch <strong style="color: #fff;">BLACK.exe</strong>.</li>
-        <li>Press <kbd class="hud-key" style="font-size: 0.85rem; padding: 2px 6px;">F10</kbd> to summon the tactical Multiplayer Overlay.</li>
-        <li>Navigate to the <strong style="color: var(--amber-hot);">Host / Join (LAN)</strong> tab.</li>
-        <li>Input Server IP: <strong style="color: #fff;">black-mp.vps-kinghost.net</strong> (or <strong style="color: #fff;">189.126.105.191</strong>) with Port <strong style="color: #fff;">1508</strong>.</li>
-        <li>Click <strong style="color: var(--amber-hot);">Connect by IP</strong>. Spawn into Veblensk City!</li>
-      </ol>
-    </div>
-
-    <!-- Controls HUD -->
-    <h3 style="font-family: var(--font-condensed); font-size: 1.4rem; color: #fff; text-transform: uppercase; margin-bottom: 1rem;">
-      TACTICAL COMBAT KEYBINDS
-    </h3>
-    <div class="controls-hud">
-      <div class="control-box">
-        <div class="hud-key">TAB</div>
-        <div class="hud-action">Scoreboard & Ping</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">B</div>
-        <div class="hud-action">Arsenal Loadout Menu</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">T</div>
-        <div class="hud-action">Global Match Chat</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">U</div>
-        <div class="hud-action">Team Tactical Chat</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">V</div>
-        <div class="hud-action">Rifle Butt Melee</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">G</div>
-        <div class="hud-action">M67 Grenade Throw</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">F6</div>
-        <div class="hud-action">Rematch Ready Vote</div>
-      </div>
-      <div class="control-box">
-        <div class="hud-key">F10</div>
-        <div class="hud-action">Multiplayer Menu</div>
-      </div>
+      <p style="font-size: 0.88rem; color: var(--text-muted);">
+        Para gerenciar a partida sem reiniciar o processo, use o console: <code style="color: var(--amber); font-family: var(--font-mono);">server/cmd.sh status</code>, <code style="color: var(--amber); font-family: var(--font-mono);">server/cmd.sh restart</code> ou <code style="color: var(--amber); font-family: var(--font-mono);">server/cmd.sh kick &lt;id&gt;</code>.
+      </p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer-classified">
+  <footer class="footer">
     <div class="container">
-      <div style="font-family: var(--font-stencil); font-size: 1.8rem; color: #fff; letter-spacing: 0.1em; margin-bottom: 0.5rem;">
-        BLACK: MULTIPLAYER
-      </div>
-      <p style="color: var(--text-muted); margin-bottom: 1rem;">
-        A tribute to Criterion Games' 2006 tactical masterpiece. Reverse-engineered native PC recompilation.
+      <p style="color: #fff; font-weight: 700; margin-bottom: 0.5rem;">
+        BLACK MULTIPLAYER MOD &bull; CRIADO PELA COMUNIDADE
+      </p>
+      <p style="margin-bottom: 1rem;">
+        Baseado no projeto <a href="https://github.com/TGP482/BLACK-XBERecomp" target="_blank">BLACK-XBERecomp</a>. Código-fonte do multiplayer disponível no <a href="https://github.com/Peterson047/BLACK-Coop" target="_blank">BLACK-Coop</a>.
       </p>
       <p style="color: var(--text-dim); font-size: 0.75rem;">
-        OPERATIONAL VPS NODE: 189.126.105.191:1508 &bull; SEC-CLEARANCE: LEVEL 4 &bull; PROTOCOL 3
+        Este é um projeto não-oficial feito por fãs. *BLACK* é marca registrada da Criterion Games / Electronic Arts.
       </p>
     </div>
   </footer>
