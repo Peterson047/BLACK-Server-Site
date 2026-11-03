@@ -1,29 +1,54 @@
-# BLACK Dedicated Server - Portal & Documentation
+# BLACK Dedicated Server - Portal & Player Hub (Next.js)
 
-A dedicated tactical website and documentation portal for the **BLACK Multiplayer Dedicated Server** (Linux / Ubuntu 24.04).
+A high-performance tactical portal and player hub for the **BLACK Multiplayer Mod** (Criterion Games 2006 port to PC x86-64) and its official Linux dedicated server.
 
-## Features
-- **Official Live Server Card:** Shows the active VPS host (`black-mp.vps-kinghost.net:1508`) with 1-click IP copy.
-- **Interactive `server.toml` Visual Configurator:** Real-time form with sliders, MOTD editor, and copyable TOML output.
-- **Admin Console Command Reference (`cmd.sh`):** Interactive filterable table of runtime server commands (`status`, `restart`, `kick`, `ban`, `say`, etc.).
-- **Step-by-Step Deployment Guide:** Dedicated tabs for Ubuntu 24.04 VPS, WSL2 Local LAN, and Systemd Service.
-- **Player Connection Guide:** Step-by-step connection guide for the Windows client and in-game tactical keybind cheat sheet.
-- **Zero-Dependency Architecture:** Pure HTML5, modern vanilla CSS with tactical military HUD styling, and responsive JavaScript.
+Built with **Next.js 16 (App Router, Turbopack)**, **React 19**, and **TypeScript**.
 
-## How to Preview Locally
-Simply double-click `index.html` to open in any web browser, or launch a quick local static server:
+---
 
+## 🚀 Features
+
+- **Live Server Card:** Official 24/7 dedicated server in Brazil (`189.126.105.191:1508` / `black-mp.vps-kinghost.net`) with 1-click IP copy.
+- **Dica Pro (Favorites):** Integrated instructions and 1-click copy for `tdm-favorites.txt` to automatically pin the server in the client's F10 menu.
+- **3-Step Setup Guide:** Clear steps for players (Alpha download, `Black.iso` in `assets\`, launch and connect).
+- **Native Port & Specs Grid:** Highlights native C++ execution (no emulators), Vulkan 1.2+ rendering, 60+ FPS, and native controller/mouse support.
+- **Interactive Screenshot Lightbox:** Real in-game screenshots with full-screen zoom, keyboard navigation (`Esc`), and high-res previews.
+- **Tactical Controls Cheat-Sheet:** In-game HUD shortcuts cheat-sheet (`F10`, `TAB`, `B`, `T`, `U`, `V`, `G`, `F6`).
+- **Interactive Player FAQ:** Instant accordion answering common setup and gameplay questions.
+- **Server API Route (`/api/server`):** Built-in REST endpoint returning server host info, port, game mode, and client requirements.
+- **Clan Hosting Guide:** Lean Linux setup commands for server administrators.
+
+---
+
+## 🛠️ Development & Build
+
+### Requirements
+- **Node.js** 18+ (tested on Node v24)
+- **npm** 10+
+
+### Run Development Server
 ```bash
-# Python
-python -m http.server 8080
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-# Or Node.js
-npx serve .
+### Build for Production
+```bash
+npm run build
 ```
 
-Open `http://localhost:8080`.
+### Start Production Server
+```bash
+npm run start
+```
 
-## How to Host
-1. **GitHub Pages:** Push this repository to GitHub and enable GitHub Pages in Settings -> Pages -> Deploy from branch `main` / root.
-2. **VPS (KingHost / Nginx / Caddy):** Copy this folder to `/var/www/black-server` and point a domain or subdomain (e.g. `server.black-mp...`) to it.
-3. **Vercel / Netlify:** Import the repository for instant global CDN hosting.
+---
+
+## 🌐 Deployment Options
+
+1. **Vercel (Recommended):**
+   - Push to GitHub and import into Vercel for zero-config global edge hosting.
+2. **VPS (Ubuntu / Linux) with PM2 or Systemd:**
+   - Run `npm run build && npm run start` behind Nginx/Caddy reverse proxy.
+3. **Static Export (Optional):**
+   - Configure `output: 'export'` in `next.config.mjs` to deploy to GitHub Pages, Cloudflare Pages, or static Nginx.
