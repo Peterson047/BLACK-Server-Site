@@ -1,41 +1,68 @@
+'use client';
+
 import React from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function HowToPlay() {
-  return (
-    <section id="setup" className="section container">
-      <span className="section-tag">// TUTORIAL DE INSTALAÇÃO</span>
-      <h2 className="section-title">COMO JOGAR EM 3 PASSOS</h2>
-      <p className="section-desc">
-        O mod roda de forma nativa no Windows 10/11 (64-bit) com placa de vídeo compatível com Vulkan.
-      </p>
+  const { t } = useLanguage();
 
-      <div className="steps-grid">
+  return (
+    <section id="setup" className="max-w-7xl mx-auto px-4 py-12 border-t border-neutral-800/80">
+      <div className="pb-3 border-b border-neutral-800 mb-8">
+        <span className="text-xs font-mono-tactical text-amber-500">{t.setup.tag}</span>
+        <h2 className="text-3xl font-military text-white tracking-wider mt-1">{t.setup.title}</h2>
+        <p className="text-xs font-mono-tactical text-neutral-400">
+          {t.setup.desc}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
         {/* Passo 1 */}
-        <div className="step-card">
-          <div className="step-num">01</div>
-          <h3 className="step-title">BAIXE O CLIENTE</h3>
-          <p className="step-desc">
-            Baixe a versão Alpha mais recente no repositório <a href="https://github.com/Peterson047/BLACK-XBEMultiplayer/releases" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--amber)' }}>BLACK-XBEMultiplayer</a> e descompacte a pasta no seu computador.
+        <div className="bg-neutral-950 border border-neutral-800 p-6 tactical-corner space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-4xl font-military text-amber-500 font-bold">01</span>
+            <span className="text-xs font-mono-tactical text-neutral-500">{t.setup.step1Tag}</span>
+          </div>
+          <h3 className="text-xl font-military text-white tracking-wide">{t.setup.step1Title}</h3>
+          <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+            {t.setup.step1Desc}
           </p>
+          <a href="https://github.com/Peterson047/BLACK-XBEMultiplayer/releases" target="_blank" rel="noopener noreferrer" className="inline-block text-xs font-mono-tactical text-amber-400 hover:underline">
+            {t.setup.step1Link}
+          </a>
         </div>
 
         {/* Passo 2 */}
-        <div className="step-card">
-          <div className="step-num">02</div>
-          <h3 className="step-title">COLOQUE SUA ISO</h3>
-          <p className="step-desc">
-            Coloque o arquivo da sua cópia legal do jogo (<strong>Black.iso</strong> de Xbox Original) dentro da pasta <code style={{ color: 'var(--amber)', fontFamily: 'var(--font-mono)' }}>assets\</code>. O jogo gera os pacotes multiplayer sozinho na primeira vez.
+        <div className="bg-neutral-950 border border-neutral-800 p-6 tactical-corner space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-4xl font-military text-amber-500 font-bold">02</span>
+            <span className="text-xs font-mono-tactical text-neutral-500">{t.setup.step2Tag}</span>
+          </div>
+          <h3 className="text-xl font-military text-white tracking-wide">{t.setup.step2Title}</h3>
+          <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+            {t.setup.step2Desc}
           </p>
+          <div className="text-[11px] font-mono-tactical text-neutral-500">
+            {t.setup.step2Path}
+          </div>
         </div>
 
         {/* Passo 3 */}
-        <div className="step-card">
-          <div className="step-num">03</div>
-          <h3 className="step-title">ABRA E CONECTE</h3>
-          <p className="step-desc">
-            Execute o <strong style={{ color: '#fff' }}>BLACK.exe</strong>. Aperte <strong style={{ color: 'var(--amber)' }}>F10</strong> para abrir o menu multiplayer, cole o IP do servidor e clique em <strong>Connect by IP</strong>!
+        <div className="bg-neutral-950 border border-neutral-800 p-6 tactical-corner space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-4xl font-military text-amber-500 font-bold">03</span>
+            <span className="text-xs font-mono-tactical text-neutral-500">{t.setup.step3Tag}</span>
+          </div>
+          <h3 className="text-xl font-military text-white tracking-wide">{t.setup.step3Title}</h3>
+          <p className="text-xs text-neutral-300 font-sans leading-relaxed">
+            {t.setup.step3Desc}
           </p>
+          <div className="text-[11px] font-mono-tactical text-emerald-400">
+            {t.setup.step3Ready}
+          </div>
         </div>
+
       </div>
     </section>
   );

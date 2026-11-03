@@ -1,47 +1,49 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Maximize2, X } from 'lucide-react';
-
-interface Screenshot {
-  src: string;
-  alt: string;
-  caption: string;
-  sub: string;
-}
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ScreenshotGallery() {
-  const screenshots: Screenshot[] = [
+  const { t } = useLanguage();
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+
+  const screenshots = [
+    {
+      src: '/img/in_game_combat.png',
+      alt: t.screenshots.combatCap,
+      caption: t.screenshots.combatCap,
+      sub: t.screenshots.combatSub,
+    },
     {
       src: '/img/server_browser.png',
-      alt: 'Menu de Conexão F10',
-      caption: 'Menu de Conexão Multiplayer [F10]',
-      sub: 'Conexão direta por IP, busca na rede local e Lista de Servidores Favoritos.'
+      alt: t.screenshots.browserCap,
+      caption: t.screenshots.browserCap,
+      sub: t.screenshots.browserSub,
     },
     {
       src: '/img/buy_menu.png',
-      alt: 'Menu do Arsenal [B]',
-      caption: 'Menu do Arsenal / Compra [B]',
-      sub: 'Escolha seu armamento tático no início da rodada (Rifles, Shotguns e Pistolas).'
+      alt: t.screenshots.buyCap,
+      caption: t.screenshots.buyCap,
+      sub: t.screenshots.buySub,
     },
     {
       src: '/img/tab_menu.png',
-      alt: 'Placar de Pontuação [TAB]',
-      caption: 'Placar Tático com Pings [TAB]',
-      sub: 'Acompanhe pontuação, baixas, pings de cada operador e progresso da partida.'
-    }
+      alt: t.screenshots.tabCap,
+      caption: t.screenshots.tabCap,
+      sub: t.screenshots.tabSub,
+    },
   ];
 
-  const [activeImage, setActiveImage] = useState<Screenshot | null>(null);
+  const activeImage = activeImageIndex !== null ? screenshots[activeImageIndex] : null;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setActiveImage(null);
+        setActiveImageIndex(null);
       }
     };
 
-    if (activeImage) {
+    if (activeImageIndex !== null) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     } else {
@@ -52,56 +54,69 @@ export default function ScreenshotGallery() {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [activeImage]);
+  }, [activeImageIndex]);
 
   return (
-    <section id="screenshots" className="section container">
-      <span className="section-tag">// GALERIA DO MOD</span>
-      <h2 className="section-title">SCREENSHOTS EM PARTIDA</h2>
-      <p className="section-desc">
-        Imagens reais capturadas nas partidas multiplayer no Windows. Clique em qualquer imagem para ver em tela cheia.
-      </p>
+    <section id="screenshots" className="max-w-7xl mx-auto px-4 py-12 border-t border-neutral-800/80">
+      <div className="pb-3 border-b border-neutral-800 mb-6">
+        <span className="text-xs font-mono-tactical text-amber-500">{t.screenshots.tag}</span>
+        <h2 className="text-3xl font-military text-white tracking-wider mt-1">{t.screenshots.title}</h2>
+        <p className="text-xs font-mono-tactical text-neutral-400">
+          {t.screenshots.desc}
+        </p>
+      </div>
 
-      <div className="screenshot-grid">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {screenshots.map((s, idx) => (
           <div 
             key={idx} 
-            className="screen-item"
-            onClick={() => setActiveImage(s)}
+            className="bg-neutral-950 border border-neutral-800 p-2 tactical-corner group cursor-pointer"
+            onClick={() => setActiveImageIndex(idx)}
           >
-            <div className="screen-img-wrap">
+            <div className="relative overflow-hidden aspect-video bg-neutral-900 rounded">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={s.src} alt={s.alt} />
-              <div className="zoom-badge">
-                <Maximize2 size={12} style={{ display: 'inline', marginRight: '4px' }} />
-                AMPLIAR
+              <img 
+                src={s.src} 
+                alt={s.alt} 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200" 
+              />
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span className="px-2 py-1 bg-amber-500 text-black text-xs font-military font-bold">
+                  {t.screenshots.zoom}
+                </span>
               </div>
             </div>
-            <div className="screen-caption">{s.caption}</div>
+            <div className="mt-2 text-xs font-mono-tactical text-neutral-300 font-bold">{s.caption}</div>
+            <div className="text-[11px] font-mono-tactical text-neutral-500 truncate">{s.sub}</div>
           </div>
         ))}
       </div>
 
       {/* Lightbox Modal */}
       {activeImage && (
-        <div className="lightbox-modal open" role="dialog" aria-modal="true">
-          <div className="lightbox-backdrop" onClick={() => setActiveImage(null)}></div>
-          <div className="lightbox-box">
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          onClick={() => setActiveImageIndex(null)}
+        >
+          <div 
+            className="relative max-w-5xl w-full bg-neutral-950 border border-neutral-800 p-2 rounded"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button 
-              className="lightbox-close" 
-              onClick={() => setActiveImage(null)}
-              title="Fechar (Esc)"
+              onClick={() => setActiveImageIndex(null)}
+              className="absolute -top-10 right-0 text-white font-mono-tactical text-xs px-3 py-1 bg-neutral-800 border border-neutral-700 hover:bg-red-600 transition-colors cursor-pointer"
             >
-              <X size={20} />
+              {t.screenshots.closeEsc}
             </button>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src={activeImage.src} 
               alt={activeImage.alt} 
-              className="lightbox-img-el" 
+              className="w-full max-h-[80vh] object-contain mx-auto rounded" 
             />
-            <div className="lightbox-caption">
-              <strong>{activeImage.caption}</strong> &bull; {activeImage.sub}
+            <div className="p-3 text-xs font-mono-tactical text-neutral-300 border-t border-neutral-800 mt-2">
+              <strong className="text-amber-400 text-sm block">{activeImage.caption}</strong>
+              <span className="text-neutral-400">{activeImage.sub}</span>
             </div>
           </div>
         </div>

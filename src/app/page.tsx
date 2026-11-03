@@ -2,12 +2,12 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ServerBrowser from '@/components/ServerBrowser';
 import HowToPlay from '@/components/HowToPlay';
-import SystemSpecs from '@/components/SystemSpecs';
-import ScreenshotGallery from '@/components/ScreenshotGallery';
 import ControlsCheatSheet from '@/components/ControlsCheatSheet';
-import Community from '@/components/Community';
+import ScreenshotGallery from '@/components/ScreenshotGallery';
+import SystemSpecs from '@/components/SystemSpecs';
 import FaqSection from '@/components/FaqSection';
 import HostGuide from '@/components/HostGuide';
+import Community from '@/components/Community';
 import Footer from '@/components/Footer';
 
 export default function HomePage() {
@@ -18,12 +18,12 @@ export default function HomePage() {
         <Hero />
         <ServerBrowser />
         <HowToPlay />
-        <SystemSpecs />
-        <ScreenshotGallery />
         <ControlsCheatSheet />
-        <Community />
+        <ScreenshotGallery />
+        <SystemSpecs />
         <FaqSection />
         <HostGuide />
+        <Community />
       </main>
       <Footer />
     </>
