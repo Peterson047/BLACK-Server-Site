@@ -24,10 +24,12 @@
 
     <nav>
       <ul class="nav-links">
-        <li><a href="#servers">Servers (Onde Jogar)</a></li>
+        <li><a href="#servers">Servidores</a></li>
         <li><a href="#setup">Como Jogar</a></li>
+        <li><a href="#specs">Requisitos</a></li>
         <li><a href="#screenshots">Screenshots</a></li>
         <li><a href="#controls">Controles</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#host">Hospedar Servidor</a></li>
         <li><a href="https://discord.gg/szt9HJYjDt" target="_blank" style="color: #5865F2;">Discord</a></li>
       </ul>
@@ -109,8 +111,27 @@
     </div>
 
     <!-- Quick Tip on How to Join -->
-    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 1.25rem 1.5rem; border-radius: 4px; font-size: 0.95rem;">
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 1.25rem 1.5rem; border-radius: 4px; font-size: 0.95rem; margin-bottom: 1.5rem;">
       <strong style="color: var(--amber);">Como entrar:</strong> No jogo, aperte <kbd class="hud-key" style="font-size: 0.75rem; padding: 2px 5px;">F10</kbd> → aba <strong>Host / Join (LAN)</strong> → digite o IP <code style="color: #fff; font-family: var(--font-mono);">189.126.105.191</code> e porta <code style="color: #fff; font-family: var(--font-mono);">1508</code> → clique em <strong>Connect by IP</strong>.
+    </div>
+
+    <!-- Pro-Tip: Save to Favorites -->
+    <div class="favorites-card">
+      <div class="favorites-header">
+        <span class="favorites-badge">⭐ DICA PRO</span>
+        <h3 class="favorites-title">SALVE O SERVIDOR NOS FAVORITOS DO JOGO</h3>
+      </div>
+      <p class="favorites-desc">
+        Para não precisar digitar o IP toda vez no menu <kbd class="hud-key-small">F10</kbd>, crie um arquivo chamado <code class="code-inline">tdm-favorites.txt</code> na mesma pasta do <code>BLACK.exe</code> com o seguinte conteúdo:
+      </p>
+      <div class="favorites-code-wrap">
+        <pre class="favorites-code" id="fav-code-text">TDM-FAVORITES 1
+189.126.105.191:1508</pre>
+        <button class="btn-copy-small" id="copy-fav-btn" data-clipboard="TDM-FAVORITES 1&#10;189.126.105.191:1508">COPIAR TEXTO</button>
+      </div>
+      <p class="favorites-sub">
+        Assim que você abrir o menu multiplayer (<kbd class="hud-key-small">F10</kbd>), o servidor oficial aparecerá instantaneamente com ping em tempo real!
+      </p>
     </div>
   </section>
 
@@ -152,26 +173,70 @@
     </div>
   </section>
 
+  <!-- Section: System Requirements & Native Features -->
+  <section id="specs" class="section container">
+    <span class="section-tag">// TECNOLOGIA E COMPATIBILIDADE</span>
+    <h2 class="section-title">PORT NATIVO PARA PC &bull; 60+ FPS</h2>
+    <p class="section-desc">
+      O <strong>BLACK Multiplayer</strong> não roda em emuladores pesados (PCSX2/Xemu). O código foi recompilado em C++ para Windows x86-64 com renderizador Vulkan de alto rendimento.
+    </p>
+
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-icon">⚡</div>
+        <div class="spec-title">DESEMPENHO NATIVO</div>
+        <p class="spec-text">Sem overhead de emulação. Latência mínima de comando, 60 FPS cravados ou framerate livre, com carregamento ultrarrápido dos mapas.</p>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">🖥️</div>
+        <div class="spec-title">SISTEMA COMPATÍVEL</div>
+        <p class="spec-text">Windows 10 ou 11 (64-bit). Requer GPU compatível com <strong>Vulkan 1.2+</strong> (NVIDIA GTX 600+, AMD Radeon HD 7000+, Intel Arc / Iris / HD 500+).</p>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">🎮</div>
+        <div class="spec-title">CONTROLE OU MOUSE</div>
+        <p class="spec-text">Controle nativo de Xbox ou PlayStation com suporte a vibração, ou mira rápida no Teclado e Mouse para tiroteios frenéticos.</p>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">🌐</div>
+        <div class="spec-title">NETCODE DEDICADO</div>
+        <p class="spec-text">Servidor autoritativo de alta taxa de tick (UDP), com predição no cliente, hitmarkers na mira e sincronização de projéteis e explosões.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 3: In-Game Screenshots -->
   <section id="screenshots" class="section container">
     <span class="section-tag">// GALERIA DO MOD</span>
     <h2 class="section-title">SCREENSHOTS EM PARTIDA</h2>
-    <p class="section-desc">Imagens reais capturadas nas partidas multiplayer no Windows.</p>
+    <p class="section-desc">Imagens reais capturadas nas partidas multiplayer no Windows. Clique em qualquer imagem para ver em tela cheia.</p>
 
     <div class="screenshot-grid">
-      <div class="screen-item">
-        <img src="assets/img/server_browser.png" alt="Menu de Conexão F10">
-        <div class="screen-caption">Menu de Conexão Multiplayer (F10)</div>
+      <div class="screen-item" data-full="assets/img/server_browser.png" data-caption="Menu de Conexão Multiplayer (F10) &bull; Conexão direta por IP e Lista de Favoritos">
+        <div class="screen-img-wrap">
+          <img src="assets/img/server_browser.png" alt="Menu de Conexão F10">
+          <div class="zoom-badge">🔍 AMPLIAR</div>
+        </div>
+        <div class="screen-caption">Menu de Conexão Multiplayer [F10]</div>
       </div>
 
-      <div class="screen-item">
-        <img src="assets/img/buy_menu.png" alt="Menu do Arsenal [B]">
-        <div class="screen-caption">Menu do Arsenal / Compra de Armas [B]</div>
+      <div class="screen-item" data-full="assets/img/buy_menu.png" data-caption="Menu do Arsenal / Compra de Armas [B] &bull; Escolha seu armamento tático no início da rodada">
+        <div class="screen-img-wrap">
+          <img src="assets/img/buy_menu.png" alt="Menu do Arsenal [B]">
+          <div class="zoom-badge">🔍 AMPLIAR</div>
+        </div>
+        <div class="screen-caption">Menu do Arsenal / Compra [B]</div>
       </div>
 
-      <div class="screen-item">
-        <img src="assets/img/tab_menu.png" alt="Placar de Pontuação [TAB]">
-        <div class="screen-caption">Placar Tático com Pings e Frags [TAB]</div>
+      <div class="screen-item" data-full="assets/img/tab_menu.png" data-caption="Placar Tático com Pings e Frags [TAB] &bull; Acompanhe pontuação e latência em tempo real">
+        <div class="screen-img-wrap">
+          <img src="assets/img/tab_menu.png" alt="Placar de Pontuação [TAB]">
+          <div class="zoom-badge">🔍 AMPLIAR</div>
+        </div>
+        <div class="screen-caption">Placar Tático com Pings [TAB]</div>
       </div>
     </div>
   </section>
@@ -248,6 +313,65 @@
     </div>
   </section>
 
+  <!-- Section: FAQ -->
+  <section id="faq" class="section container">
+    <span class="section-tag">// DÚVIDAS FREQUENTES</span>
+    <h2 class="section-title">PERGUNTAS FREQUENTES</h2>
+    <p class="section-desc">Tudo o que você precisa saber para entrar em combate sem dificuldades:</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Preciso de emulador (PCSX2, RPCS3 ou Xemu) instalado para jogar?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><strong>Não!</strong> O projeto utiliza engenharia reversa estática e recompilação do executável original para gerar código nativo C++ x86-64. O jogo roda diretamente pelo <code>BLACK.exe</code> no Windows com desempenho altíssimo, tempos de carregamento instantâneos e sem o peso ou configurações complexas de um emulador.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Onde consigo o arquivo Black.iso e qual versão devo usar?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Você deve usar a sua cópia original do jogo <strong>BLACK para Xbox Original</strong> em formato ISO. Renomeie o arquivo para <code>Black.iso</code> e coloque na pasta <code>assets\</code>. Na primeira inicialização, o motor extrai e prepara os arquivos automaticamente.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Funciona com controle de Xbox e PlayStation?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p><strong>Sim!</strong> O suporte a controles via XInput e DirectInput é 100% nativo. Controles de Xbox 360, Xbox One/Series e PlayStation (DualShock 4 / DualSense) funcionam imediatamente com vibração e mapeamento idêntico ao console original.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Como funciona a compra de armas durante a partida?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Ao entrar na partida ou quando renascer na base da sua equipe, pressione a tecla <kbd class="hud-key-small">B</kbd>. Um menu tático abrirá permitindo escolher armas primárias icônicas (M16A2, AK-47, G36C, SPAS-12, Remington 870, Walther WA2000) e secundárias (Glock 19, Magnum, MP5).</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Como funciona a rotação e o reinício das partidas no servidor?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>O servidor dedicado é 24/7 e autoritativo. Ao final da partida de Team Deathmatch, a tela de vitória/derrota é exibida para todos os jogadores e uma nova rodada começa <strong>automaticamente após 15 segundos</strong>, sem travar ou depender da ação manual de nenhum jogador.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 6: Host a Dedicated Server (Hospedagem) -->
   <section id="host" class="section container">
     <span class="section-tag">// PARA HOSPEDADORES DE SERVIDORES</span>
@@ -288,6 +412,16 @@ server/run.sh 1508 "Meu Servidor BLACK"</div>
       </p>
     </div>
   </footer>
+
+  <!-- Lightbox Modal for Screenshots -->
+  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-box">
+      <button class="lightbox-close" id="lightbox-close-btn" title="Fechar (Esc)">&times;</button>
+      <img id="lightbox-img" src="" alt="Screenshot Ampliada">
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>
