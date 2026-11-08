@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import { WEB_PLAY_URL, DONATE_URL } from '@/lib/links';
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -18,6 +19,37 @@ export default function Hero() {
           <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-sans max-w-2xl">
             {t.hero.desc}
           </p>
+
+          {/* Jogar online no navegador + apoio */}
+          <div className="bg-neutral-950/80 border border-amber-500/50 p-5 tactical-corner space-y-4">
+            <div className="space-y-1">
+              <span className="text-xs font-mono-tactical text-amber-400">{t.hero.onlineTag}</span>
+              <h2 className="text-2xl sm:text-3xl font-military tracking-wide text-white leading-none">
+                {t.hero.onlineTitle}
+              </h2>
+              <p className="text-xs sm:text-sm text-neutral-300 font-sans">{t.hero.onlineDesc}</p>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
+              <a
+                href={WEB_PLAY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-military px-6 py-4 bg-amber-500 hover:bg-amber-400 text-black font-military text-2xl font-bold flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>{t.hero.btnOnline}</span>
+              </a>
+              <a
+                href={DONATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-military px-6 py-4 bg-neutral-800 hover:bg-neutral-700 text-amber-400 border border-amber-500/40 font-military text-xl font-bold flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>{t.hero.btnDonate}</span>
+              </a>
+            </div>
+            <p className="text-[11px] font-mono-tactical text-neutral-400">{t.hero.onlineReqs}</p>
+            <p className="text-[11px] font-sans text-neutral-500">{t.hero.donateNote}</p>
+          </div>
 
           {/* Botões Táticos */}
           <div className="flex flex-wrap gap-3 pt-2">
