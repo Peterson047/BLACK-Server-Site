@@ -82,6 +82,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Teko:wght@500;700&family=Inter:wght@400;500;600;700;800&display=swap" 
           rel="stylesheet" 
         />
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4197921130218486"
+          crossOrigin="anonymous"
+        />
         {/* Schema.org VideoGame Structured Data for Google Rich Snippets */}
         <script
           type="application/ld+json"
